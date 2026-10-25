@@ -112,7 +112,7 @@ def classify_pixels(before, after, valid):
 
 @app.get("/")
 def home():
-    return FileResponse(STATIC_DIR / "index.html")
+    return FileResponse(ROOT / "index.html")
 
 @app.get("/api/health")
 def health():
