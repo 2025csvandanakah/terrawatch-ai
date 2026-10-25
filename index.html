@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TerraWatch AI | Satellite Intelligence</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+<link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+<header class="topbar"><div class="brand-mark">TW</div><div><h1>TerraWatch <span>AI</span></h1><p>Satellite Change Intelligence</p></div><div class="live-pill"><i></i> NASA GIBS imagery</div></header>
+<main>
+<section class="hero"><div><p class="eyebrow">EARTH OBSERVATION · CHANGE DETECTION</p><h2>See what changed.<br><em>Understand what to check.</em></h2><p class="sub">Compare dated satellite imagery, screen out some cloud/haze candidates, map flagged regions, and generate an evidence-first report.</p></div><div class="globe">◉</div></section>
+<section class="panel">
+<div class="section-title"><div><span class="step">01</span><h3>Choose your observation area</h3></div><span class="muted">WGS84 coordinates</span></div>
+<div class="form-grid">
+<label>Before date<input id="beforeDate" type="date"></label><label>After date<input id="afterDate" type="date"></label>
+<label>West longitude<input id="west" type="number" step="0.01" value="76.55"></label><label>South latitude<input id="south" type="number" step="0.01" value="12.90"></label>
+<label>East longitude<input id="east" type="number" step="0.01" value="77.00"></label><label>North latitude<input id="north" type="number" step="0.01" value="13.25"></label>
+</div>
+<div class="actions"><button id="analyzeBtn" class="primary">↗ Analyze satellite changes</button><button id="reportBtn" class="secondary" disabled>Download report</button><span id="status" class="status">Ready to analyze</span></div>
+<p class="hint">Choose a small region and two dates with available imagery. Imagery coverage and cloud conditions vary by date.</p>
+</section>
+<section id="results" hidden>
+<div class="section-title"><div><span class="step">02</span><h3>Change analysis</h3></div><span class="muted" id="dateSummary"></span></div>
+<div class="metrics">
+<article class="metric"><span>Pixels flagged</span><strong id="changePct">—</strong><small>Of non-cloud-candidate pixels</small></article>
+<article class="metric"><span>Cloud/haze candidates</span><strong id="cloudPct">—</strong><small>Heuristic mask, not guaranteed</small></article>
+<article class="metric"><span>Screening priority</span><strong id="priority">—</strong><small>Not confirmed severity</small></article>
+</div>
+<div class="image-grid">
+<article class="image-card"><div class="image-head"><b>Before</b><span id="beforeLabel"></span></div><img id="beforeImg" alt="Before satellite imagery"></article>
+<article class="image-card"><div class="image-head"><b>After</b><span id="afterLabel"></span></div><img id="afterImg" alt="After satellite imagery"></article>
+<article class="image-card"><div class="image-head"><b>Change overlay</b><span>Red = flagged pixels</span></div><img id="overlayImg" alt="Change overlay"></article>
+<article class="image-card"><div class="image-head"><b>Difference heatmap</b><span>Relative RGB difference</span></div><img id="heatImg" alt="Difference heatmap"></article>
+<article class="image-card"><div class="image-head"><b>Cloud/haze candidates</b><span>Yellow = excluded candidate pixels</span></div><img id="cloudImg" alt="Cloud and haze heuristic overlay"></article>
+<article class="image-card category-card"><div class="image-head"><b>Candidate land-change categories</b><span>Rule-based estimates</span></div><div id="categories" class="categories"></div></article>
+</div>
+<article class="panel map-panel"><div class="section-title"><div><span class="step">03</span><h3>Geographic change view</h3></div><span class="muted">Approximate grid cells</span></div><div id="map"></div><p class="hint">Map cells indicate coarse grid areas with elevated flagged-pixel density; they are not exact damage boundaries.</p></article>
+<article class="insight"><div class="insight-icon">!</div><div><h3>Interpret results carefully</h3><p id="caveat"></p><p id="cloudNote" class="recommendation"></p><p class="recommendation">Recommended: inspect the imagery, compare another date, and verify important findings using higher-resolution imagery or authoritative sources.</p></div></article>
+</section>
+<footer>Imagery service: NASA GIBS · Prototype screening demo · Not an authoritative damage assessment</footer>
+</main>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+<script src="/static/app.js"></script>
+</body></html>

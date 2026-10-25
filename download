@@ -1,0 +1,5 @@
+.venv/
+__pycache__/
+*.py[cod]
+terrawatch_change_report.pdf
+.env
